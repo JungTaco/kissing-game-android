@@ -1,0 +1,7 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False">
+    <engine:VisualElement name="BarBackground" style="flex-grow: 0; background-image: url(&quot;project://database/Assets/Art/UI/bar.png?fileID=5156776694448688124&amp;guid=2581e4ff122bedb4385703de76adee41&amp;type=3#bar_0&quot;); width: 506px; height: 36px; -unity-background-scale-mode: scale-to-fit; align-items: stretch; align-content: auto; align-self: center; bottom: auto; position: relative; top: 1012px; left: auto;">
+        <engine:VisualElement name="BarContainer" style="flex-grow: 1; position: absolute; height: 28px; width: 372px; top: 5px; left: 67px;">
+            <engine:VisualElement name="Bar" style="flex-grow: 1; background-image: url(&quot;project://database/Assets/Art/UI/bar_interior.png?fileID=6388821516098568891&amp;guid=9444e78c28eb5fd4d9a90c9dcf1b6af3&amp;type=3#bar_interior_0&quot;);" />
+        </engine:VisualElement>
+    </engine:VisualElement>
+</engine:UXML>
