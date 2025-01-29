@@ -6,6 +6,7 @@ public class UIHandler : MonoBehaviour
 	public static UIHandler instance { get; private set; }
 
 	private VisualElement bar;
+	private VisualElement barBackground;
 
 	private void Awake()
 	{
@@ -17,11 +18,18 @@ public class UIHandler : MonoBehaviour
     {
 		UIDocument uiDocument = GetComponent<UIDocument>();
 		bar = uiDocument.rootVisualElement.Q<VisualElement>("Bar");
+		barBackground = uiDocument.rootVisualElement.Q<VisualElement>("BarBackground");
 		SetHealthValue(0f);
 	}
 
 	public void SetHealthValue(float percentage)
 	{
 		bar.style.width = Length.Percent(100 * percentage);
+	}
+
+	public void HideUI()
+	{
+		barBackground.visible = false;
+		bar.visible = false;
 	}
 }

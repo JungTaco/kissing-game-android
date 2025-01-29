@@ -12,6 +12,7 @@ public class CanvasScript : MonoBehaviour
 	public SpriteRenderer HeimerdingerBack;
 	public SpriteRenderer HeimerdingerAttention;
 	public SpriteRenderer HeimerdingerHandsDown;
+	public GameObject Win;
 
 	private float maxPoints = 100f;
 	private float currentPoints;
@@ -35,31 +36,32 @@ public class CanvasScript : MonoBehaviour
 	}
 
 	void Update()
-    {
-		if (Input.GetMouseButton(0))
+    {	
+		if (currentPoints >= maxPoints)
 		{
-			JayvikIdleRenderer.enabled = false;
-			JayvikKissRenderer.enabled = true;
-			if (currentPoints <= maxPoints)
+			WinLevel();
+		}
+		if (!Win.activeInHierarchy)
+		{
+			if (Input.GetMouseButton(0))
 			{
-				currentPoints += 0.05f;
+				StartKissing();
+				SetPoints();
 			}
-			UIHandler.instance.SetHealthValue(currentPoints / maxPoints);
-			
-		}
-		else
-		{
-			JayvikIdleRenderer.enabled = true;
-			JayvikKissRenderer.enabled = false;
-		}
+			else
+			{
+				EndKissing();
+			}
 
-		targetTimeTalking -= Time.deltaTime;
-		if (targetTimeTalking <= 0.0f)
-		{
-			TalkingTimerEnded();
-			AttentionTimerStarted();
-			TurnedTimerStarted();
+			targetTimeTalking -= Time.deltaTime;
+			if (targetTimeTalking <= 0.0f)
+			{
+				TalkingTimerEnded();
+				AttentionTimerStarted();
+				TurnedTimerStarted();
+			}
 		}
+		
 	}
 
 	void TalkingTimerEnded()
@@ -120,5 +122,36 @@ public class CanvasScript : MonoBehaviour
 		targetTimeTurned = Random.Range(3f, 4f);
 		targetTimeAttention = 0.5f;
 		targetTimeHandsDown = 0.3f;
+	}
+
+	void StartKissing()
+	{
+		JayvikIdleRenderer.enabled = false;
+		JayvikKissRenderer.enabled = true;
+	}
+
+	void EndKissing()
+	{
+		JayvikIdleRenderer.enabled = true;
+		JayvikKissRenderer.enabled = false;
+	}
+
+	void WinLevel()
+	{
+		Win.SetActive(true);
+		if (level < 2)
+		{
+			level++;
+		}
+		UIHandler.instance.HideUI();
+	}
+
+	void SetPoints()
+	{
+		if (currentPoints < maxPoints)
+		{
+			currentPoints += 0.05f;
+		}
+		UIHandler.instance.SetHealthValue(currentPoints / maxPoints);
 	}
 }
