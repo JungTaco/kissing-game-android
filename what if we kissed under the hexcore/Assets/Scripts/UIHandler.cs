@@ -32,4 +32,10 @@ public class UIHandler : MonoBehaviour
 		barBackground.visible = false;
 		bar.visible = false;
 	}
+
+	public void ShowUI()
+	{
+		barBackground.visible = true;
+		bar.visible = true;
+	}
 }
