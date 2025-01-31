@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -16,6 +17,7 @@ public class CanvasScript : MonoBehaviour
 	public SpriteRenderer HeimerdingerHandsDown;
 	public GameObject Win;
 	public GameObject Lose;
+	public TextMeshProUGUI Level_text;
 
 	private float maxPoints = 100f;
 	private float currentPoints;
@@ -28,6 +30,7 @@ public class CanvasScript : MonoBehaviour
 	private int level = 0;
 	private bool kissing = false;
 	private bool turned = false;
+	private LevelText level_text_script;
 
 	void Start()
 	{
@@ -44,6 +47,9 @@ public class CanvasScript : MonoBehaviour
 		targetTimeTurned = targetTimeTurnedArray[level];
 		targetTimeHandsDown = 0.3f;
 		currentPoints = 0.0f;
+
+		level_text_script = Level_text.GetComponent<LevelText>();
+		level_text_script.Show();
 	}
 
 	void Update()
@@ -87,13 +93,16 @@ public class CanvasScript : MonoBehaviour
 	{
 		Win.SetActive(false);
 		UIHandler.instance.ShowUI();
+		level_text_script.SetText("Level " + (level + 1));
+		level_text_script.Show();
 	}
 
 	public void Restart()
 	{
 		Lose.SetActive(false);
 		UIHandler.instance.ShowUI();
-		//ResetSprites();
+		level_text_script.SetText("Level " + (level + 1));
+		level_text_script.Show();
 	}
 
 	public void MainMenu()
@@ -165,7 +174,11 @@ public class CanvasScript : MonoBehaviour
 
 	void ResetSprites()
 	{
-		//TO DO
+		HeimerdingerBack.enabled = false;
+		HeimerdingerHandsDown.enabled = false;
+		HeimerdingerFront.enabled = true;
+		HexcoreAggitated.enabled = false;
+		HexcoreCalm.enabled = true;
 	}
 
 	void Reset()
@@ -173,6 +186,9 @@ public class CanvasScript : MonoBehaviour
 		currentPoints = 0;
 		UIHandler.instance.SetHealthValue(0/100);
 		ResetTimers();
+		ResetSprites();
+		kissing = false;
+		turned = false;
 	}
 
 	void StartKissing()
