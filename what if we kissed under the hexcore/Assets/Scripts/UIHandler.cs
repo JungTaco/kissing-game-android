@@ -27,15 +27,9 @@ public class UIHandler : MonoBehaviour
 		bar.style.width = Length.Percent(100 * percentage);
 	}
 
-	public void HideUI()
+	public void ToggleUIVisibility(bool toggle)
 	{
-		barBackground.visible = false;
-		bar.visible = false;
-	}
-
-	public void ShowUI()
-	{
-		barBackground.visible = true;
-		bar.visible = true;
+		barBackground.visible = toggle;
+		bar.visible = toggle;
 	}
 }

@@ -17,6 +17,9 @@ public class CanvasScript : MonoBehaviour
 	public SpriteRenderer HeimerdingerHandsDown;
 	public GameObject Win;
 	public GameObject Lose;
+	public GameObject Win_game;
+	public GameObject Menu;
+	public GameObject Settings;
 	public TextMeshProUGUI Level_text;
 
 	private float maxPoints = 100f;
@@ -67,7 +70,7 @@ public class CanvasScript : MonoBehaviour
 			LoseGame();
 		}
 
-		if (!Win.activeInHierarchy && !Lose.activeInHierarchy)
+		if (!Win.activeInHierarchy && !Lose.activeInHierarchy && !Menu.activeInHierarchy && !Win_game.activeInHierarchy)
 		{
 			if (Input.GetMouseButton(0))
 			{
@@ -87,12 +90,18 @@ public class CanvasScript : MonoBehaviour
 				TurnedTimerStarted();
 			}
 		}
+
+		if (Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonUp(1))
+		{
+			Menu.SetActive(!Menu.activeInHierarchy);
+			UIHandler.instance.ToggleUIVisibility(!Menu.activeInHierarchy);
+		}
 	}
 
 	public void Continue()
 	{
 		Win.SetActive(false);
-		UIHandler.instance.ShowUI();
+		UIHandler.instance.ToggleUIVisibility(true);
 		level_text_script.SetText("Level " + (level + 1));
 		level_text_script.Show();
 	}
@@ -100,15 +109,12 @@ public class CanvasScript : MonoBehaviour
 	public void Restart()
 	{
 		Lose.SetActive(false);
-		UIHandler.instance.ShowUI();
+		UIHandler.instance.ToggleUIVisibility(true);
 		level_text_script.SetText("Level " + (level + 1));
 		level_text_script.Show();
 	}
 
-	public void MainMenu()
-	{
-		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-	}
+	public void ToggleSettingsVisibility(bool toggle) => Settings.SetActive(toggle);
 
 	void TalkingTimerEnded()
 	{
@@ -213,12 +219,13 @@ public class CanvasScript : MonoBehaviour
 			level++;
 		}
 		Reset();
-		UIHandler.instance.HideUI();
+		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
 	void WinGame()
 	{
 		Reset();
+		Win_game.SetActive(true);
 	}
 
 	void LoseGame()
@@ -226,7 +233,7 @@ public class CanvasScript : MonoBehaviour
 		Lose.SetActive(true);
 		level = 0;
 		Reset();
-		UIHandler.instance.HideUI();
+		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
 	void SetPoints()
