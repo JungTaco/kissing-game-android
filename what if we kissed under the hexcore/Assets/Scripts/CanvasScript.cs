@@ -20,6 +20,7 @@ public class CanvasScript : MonoBehaviour
 	public GameObject Win_game;
 	public GameObject Menu;
 	public GameObject Settings;
+	public GameObject Instructions;
 	public TextMeshProUGUI Level_text;
 
 	private float maxPoints = 100f;
@@ -115,6 +116,8 @@ public class CanvasScript : MonoBehaviour
 	}
 
 	public void ToggleSettingsVisibility(bool toggle) => Settings.SetActive(toggle);
+
+	public void ToggleInstructionsVisibility(bool toggle) => Instructions.SetActive(toggle);
 
 	void TalkingTimerEnded()
 	{
