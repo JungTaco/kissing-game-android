@@ -2,8 +2,10 @@ using System;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CanvasScript : MonoBehaviour
 {
@@ -22,6 +24,9 @@ public class CanvasScript : MonoBehaviour
 	public GameObject Settings;
 	public GameObject Instructions;
 	public TextMeshProUGUI Level_text;
+	public AudioSource HeimerginderAudio;
+	public AudioSource KissingAudio;
+	public AudioSource HexcoreAudio;
 
 	private float maxPoints = 100f;
 	private float currentPoints;
@@ -58,7 +63,7 @@ public class CanvasScript : MonoBehaviour
 
 	void Update()
     {	
-		if (currentPoints >= maxPoints)
+		if (currentPoints >= maxPoints && !Win.activeInHierarchy)
 		{
 			if (level < 2)
 				WinLevel();
@@ -66,7 +71,7 @@ public class CanvasScript : MonoBehaviour
 				WinGame();
 		}
 
-		if(kissing && !turned)
+		if(kissing && !turned && !Lose.activeInHierarchy)
 		{
 			LoseGame();
 		}
@@ -75,7 +80,8 @@ public class CanvasScript : MonoBehaviour
 		{
 			if (Input.GetMouseButton(0))
 			{
-				StartKissing();
+				if (!kissing)
+					StartKissing();
 				SetPoints();
 			}
 			else
@@ -86,7 +92,10 @@ public class CanvasScript : MonoBehaviour
 			targetTimeTalking -= Time.deltaTime;
 			if (targetTimeTalking <= 0.0f)
 			{
-				TalkingTimerEnded();
+				if (!turned)
+				{
+					TalkingTimerEnded();
+				}
 				AttentionTimerStarted();
 				TurnedTimerStarted();
 			}
@@ -102,6 +111,7 @@ public class CanvasScript : MonoBehaviour
 	public void Continue()
 	{
 		Win.SetActive(false);
+		HeimerginderAudio.Play();
 		UIHandler.instance.ToggleUIVisibility(true);
 		level_text_script.SetText("Level " + (level + 1));
 		level_text_script.Show();
@@ -110,18 +120,25 @@ public class CanvasScript : MonoBehaviour
 	public void Restart()
 	{
 		Lose.SetActive(false);
+		HeimerginderAudio.Play();
 		UIHandler.instance.ToggleUIVisibility(true);
 		level_text_script.SetText("Level " + (level + 1));
 		level_text_script.Show();
 	}
 
-	public void ToggleSettingsVisibility(bool toggle) => Settings.SetActive(toggle);
+	public void ToggleSettingsVisibility(bool toggle)
+	{
+		Settings.SetActive(toggle);
+		StopAllSounds();
+	}
 
 	public void ToggleInstructionsVisibility(bool toggle) => Instructions.SetActive(toggle);
 
 	void TalkingTimerEnded()
 	{
 		turned = true;
+		HeimerginderAudio.Stop();
+		HexcoreAudio.Play();
 		HeimerdingerFront.enabled = false;
 		HeimerdingerAttention.enabled = true;
 		HexcoreCalm.enabled = false;
@@ -169,6 +186,8 @@ public class CanvasScript : MonoBehaviour
 			HeimerdingerFront.enabled = true;
 			HexcoreAggitated.enabled = false;
 			HexcoreCalm.enabled = true;
+			HeimerginderAudio.Play();
+			HexcoreAudio.Stop();
 			ResetTimers();
 		}
 	}
@@ -198,17 +217,20 @@ public class CanvasScript : MonoBehaviour
 		ResetSprites();
 		kissing = false;
 		turned = false;
+		StopAllSounds();
 	}
 
 	void StartKissing()
 	{
 		kissing = true;
+		KissingAudio.Play();
 		JayvikIdleRenderer.enabled = false;
 		JayvikKissRenderer.enabled = true;
 	}
 
 	void EndKissing()
 	{
+		KissingAudio.Stop();
 		kissing = false;
 		JayvikIdleRenderer.enabled = true;
 		JayvikKissRenderer.enabled = false;
@@ -229,6 +251,7 @@ public class CanvasScript : MonoBehaviour
 	{
 		Reset();
 		Win_game.SetActive(true);
+		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
 	void LoseGame()
@@ -246,5 +269,12 @@ public class CanvasScript : MonoBehaviour
 			currentPoints += 0.05f;
 		}
 		UIHandler.instance.SetHealthValue(currentPoints / maxPoints);
+	}
+
+	void StopAllSounds()
+	{
+		HeimerginderAudio.Stop();
+		KissingAudio.Stop();
+		HexcoreAudio.Stop();
 	}
 }
