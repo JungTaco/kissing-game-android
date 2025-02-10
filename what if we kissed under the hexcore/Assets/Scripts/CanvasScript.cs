@@ -59,9 +59,14 @@ public class CanvasScript : MonoBehaviour
 
 		level_text_script = Level_text.GetComponent<LevelText>();
 		level_text_script.Show();
+
+		if (PlayerPrefs.HasKey("volume"))
+		{
+			AudioListener.volume = PlayerPrefs.GetFloat("volume");
+		}		
 	}
 
-	void Update()
+	void FixedUpdate()
     {	
 		if (currentPoints >= maxPoints && !Win.activeInHierarchy)
 		{
@@ -100,7 +105,10 @@ public class CanvasScript : MonoBehaviour
 				TurnedTimerStarted();
 			}
 		}
+	}
 
+	private void Update()
+	{
 		if (Input.GetKeyUp(KeyCode.Escape) || Input.GetMouseButtonUp(1))
 		{
 			Menu.SetActive(!Menu.activeInHierarchy);
@@ -120,19 +128,40 @@ public class CanvasScript : MonoBehaviour
 	public void Restart()
 	{
 		Lose.SetActive(false);
-		HeimerginderAudio.Play();
+		ToggleWinGameVisibility(false);
 		UIHandler.instance.ToggleUIVisibility(true);
+		level = 0;
 		level_text_script.SetText("Level " + (level + 1));
 		level_text_script.Show();
+		Reset();
 	}
 
 	public void ToggleSettingsVisibility(bool toggle)
 	{
 		Settings.SetActive(toggle);
-		StopAllSounds();
+		if (toggle == true)
+			StopAllSounds();
+		else
+			ResetSounds();
 	}
 
-	public void ToggleInstructionsVisibility(bool toggle) => Instructions.SetActive(toggle);
+	public void ToggleInstructionsVisibility(bool toggle)
+	{
+		Instructions.SetActive(toggle);
+		if (toggle == true)
+			StopAllSounds();
+		else
+			ResetSounds();
+	}
+
+	public void ToggleWinGameVisibility(bool toggle)
+	{
+		Win_game.SetActive(toggle);
+		if (toggle == true)
+			StopAllSounds();
+		else
+			ResetSounds();
+	}
 
 	void TalkingTimerEnded()
 	{
@@ -209,6 +238,17 @@ public class CanvasScript : MonoBehaviour
 		HexcoreCalm.enabled = true;
 	}
 
+	void ResetSounds()
+	{
+		if (turned)
+			HexcoreAudio.Play();
+		else
+		{
+			HexcoreAudio.Stop();
+			HeimerginderAudio.Play();
+		}
+	}
+
 	void Reset()
 	{
 		currentPoints = 0;
@@ -217,7 +257,7 @@ public class CanvasScript : MonoBehaviour
 		ResetSprites();
 		kissing = false;
 		turned = false;
-		StopAllSounds();
+		ResetSounds();
 	}
 
 	void StartKissing()
@@ -244,13 +284,13 @@ public class CanvasScript : MonoBehaviour
 			level++;
 		}
 		Reset();
+		StopAllSounds();
 		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
 	void WinGame()
 	{
-		Reset();
-		Win_game.SetActive(true);
+		ToggleWinGameVisibility(true);
 		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
@@ -259,6 +299,7 @@ public class CanvasScript : MonoBehaviour
 		Lose.SetActive(true);
 		level = 0;
 		Reset();
+		StopAllSounds();
 		UIHandler.instance.ToggleUIVisibility(false);
 	}
 
@@ -266,7 +307,7 @@ public class CanvasScript : MonoBehaviour
 	{
 		if (currentPoints < maxPoints)
 		{
-			currentPoints += 0.05f;
+			currentPoints += 0.5f;
 		}
 		UIHandler.instance.SetHealthValue(currentPoints / maxPoints);
 	}
