@@ -630,7 +630,7 @@ GameObject:
   - component: {fileID: 196559455}
   - component: {fileID: 196559454}
   m_Layer: 0
-  m_Name: haimerdinger_front
+  m_Name: Haimerdinger_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -876,7 +876,7 @@ GameObject:
   - component: {fileID: 273962878}
   - component: {fileID: 273962877}
   m_Layer: 6
-  m_Name: jayvik_idle
+  m_Name: Jayvik_idle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1330,7 +1330,7 @@ GameObject:
   - component: {fileID: 433037108}
   - component: {fileID: 433037107}
   m_Layer: 0
-  m_Name: haimerdinger_back
+  m_Name: Haimerdinger_back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3040,7 +3040,7 @@ GameObject:
   - component: {fileID: 860487779}
   - component: {fileID: 860487778}
   m_Layer: 0
-  m_Name: jayvik_kiss
+  m_Name: Jayvik_kiss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4519,8 +4519,8 @@ Camera:
   m_GameObject: {fileID: 1452845757}
   m_Enabled: 1
   serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_ClearFlags: 2
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -4973,7 +4973,7 @@ GameObject:
   - component: {fileID: 1568184404}
   - component: {fileID: 1568184403}
   m_Layer: 0
-  m_Name: haimerdinger_hands_down
+  m_Name: Haimerdinger_hands_down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6710,7 +6710,7 @@ GameObject:
   - component: {fileID: 1918124691}
   - component: {fileID: 1918124690}
   m_Layer: 0
-  m_Name: hexcore_calm
+  m_Name: Hexcore_calm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6952,7 +6952,7 @@ GameObject:
   - component: {fileID: 1965711996}
   - component: {fileID: 1965711995}
   m_Layer: 0
-  m_Name: haimerdinger_attention
+  m_Name: Haimerdinger_attention
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7312,7 +7312,7 @@ GameObject:
   - component: {fileID: 2033708495}
   - component: {fileID: 2033708494}
   m_Layer: 0
-  m_Name: hexcore_aggitated
+  m_Name: Hexcore_aggitated
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
