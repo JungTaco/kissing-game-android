@@ -1,0 +1,12 @@
+# ninja log v5
+56	547	7628761679177898	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	e983e361d5d64773
+552	1106	7628761684699980	E:/Denisa/unity projects/what if we kissed under the hexcore android/what if we kissed under the hexcore/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4v625c4h/obj/arm64-v8a/libswappywrapper.so	686bcfbe417503f0
+18	1840	7628761691989141	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	5245cdca0ff2e53a
+7	1857	7628761692224154	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	242da0aef39e2a50
+44	1885	7628761692525156	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	8a1c81f31d82764c
+25	1890	7628761692578440	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	ece5f30a0103d011
+50	1962	7628761693321351	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	88daf4794e5d95ad
+1	2088	7628761694571759	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	62f3b7ce35e2fb22
+32	2234	7628761696044974	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	1c9eb5018eb9f528
+12	2496	7628761697891607	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a406390e7f2698bb
+2501	3170	7628761705276607	E:/Denisa/unity projects/what if we kissed under the hexcore android/what if we kissed under the hexcore/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/4v625c4h/obj/arm64-v8a/libgame.so	d77913cda08b97a4

@@ -247,7 +247,12 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      haimerdinger_sheet_0: -3507316655483087311
+      haimerdinger_sheet_1: -7871664785261360770
+      haimerdinger_sheet_2: 4672863679617808434
+      haimerdinger_sheet_3: -4399827164485790172
+      haimerdinger_sheet_4: -7594700815164970041
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
